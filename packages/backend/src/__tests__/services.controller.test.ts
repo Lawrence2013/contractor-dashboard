@@ -1,10 +1,11 @@
+/** @jest-environment node */
 import { Request, Response } from 'express';
 import * as controller from '../controllers/services';
 import * as serviceLayer from '../services/service';
 
 jest.mock('../services/service');
 
-const serviceMock = jest.mocked(serviceLayer, true);
+const serviceMock = jest.mocked(serviceLayer, { shallow: true });
 
 describe('services controller', () => {
   test('create success', async () => {
