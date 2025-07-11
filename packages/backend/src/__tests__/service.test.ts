@@ -1,9 +1,10 @@
+/** @jest-environment node */
 import { ServiceModel } from '../models/service';
 import * as service from '../services/service';
 
 jest.mock('../models/service');
 
-const ServiceModelMock = jest.mocked(ServiceModel, true);
+const ServiceModelMock = jest.mocked(ServiceModel, { shallow: true });
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -11,7 +12,7 @@ beforeEach(() => {
 
 describe('service layer', () => {
   test('createService checks overlap and creates', async () => {
-    ServiceModelMock.findOne = jest.fn().mockResolvedValue(null) as any;
+    ServiceModelMock.findOne = jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }) as any;
     ServiceModelMock.create = jest.fn().mockResolvedValue({ id: '1' }) as any;
     const data: any = {
       name: 'Table',
@@ -27,7 +28,7 @@ describe('service layer', () => {
   });
 
   test('createService throws on overlap', async () => {
-    ServiceModelMock.findOne = jest.fn().mockResolvedValue({}) as any;
+    ServiceModelMock.findOne = jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue({}) }) as any;
     const data: any = {
       name: 'Table',
       availableFrom: new Date('2024-01-01'),
