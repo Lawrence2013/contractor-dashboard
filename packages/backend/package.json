@@ -18,6 +18,9 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@types/node": "^20.11.19",
+    "@types/express": "^5.0.3",
+    "@types/cookie-parser": "^1.4.9"
   }
 }
