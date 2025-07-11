@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contractor-dashboard
+spec:
+  selector:
+    matchLabels:
+      app: contractor-dashboard
+  template:
+    metadata:
+      labels:
+        app: contractor-dashboard
+    spec:
+      containers:
+        - name: backend
+          image: nginx
