@@ -15,3 +15,14 @@ To run in Docker:
 ```bash
 docker-compose up --build
 ```
+
+## Observability
+
+The backend emits JSON logs using Winston and exposes monitoring endpoints:
+
+- `GET /healthz` – liveness probe
+- `GET /readyz` – readiness probe (checks MongoDB connection)
+- `GET /metrics` – Prometheus metrics
+
+The frontend integrates Sentry error tracking via an error boundary. Provide a
+`VITE_SENTRY_DSN` environment variable at build time to enable reporting.
